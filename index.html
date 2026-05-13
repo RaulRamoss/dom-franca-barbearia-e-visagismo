@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dom França Barbearia e Visagismo</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A227;
+      --gold-dark: #A68518;
+      --gold-light: rgba(201,162,39,0.12);
+      --brown: #3D2B1F;
+      --brown-dark: #2A1D15;
+      --brown-light: rgba(61,43,31,0.12);
+      --cream: #F5F0E8;
+      --cream-dark: #E8DFD0;
+      --white: #FFFFFF;
+      --dark: #1A1A1A;
+      --text: #2C2C2C;
+      --muted: #666666;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 56px;
+      transition: background 0.35s, box-shadow 0.35s;
+    }
+    nav.scrolled {
+      background: rgba(245,240,232,0.96);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.07);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .nav-logo svg { width: 38px; height: 42px; flex-shrink: 0; }
+    .nav-logo-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--brown);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta {
+      background: var(--gold) !important;
+      color: white !important;
+      padding: 10px 26px;
+      border-radius: 50px;
+      font-weight: 600 !important;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s !important;
+      box-shadow: 0 4px 16px rgba(201,162,39,0.3);
+    }
+    .nav-cta:hover {
+      background: var(--gold-dark) !important;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 24px rgba(201,162,39,0.4) !important;
+    }
+    .nav-hamburger {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ── MOBILE DRAWER ── */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--cream);
+      z-index: 999;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 36px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: 'Playfair Display', serif;
+      font-size: 34px;
+      color: var(--text);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .mobile-nav a:hover { color: var(--gold); }
+    .mobile-close {
+      position: absolute;
+      top: 22px; right: 28px;
+      background: none;
+      border: none;
+      font-size: 26px;
+      cursor: pointer;
+      color: var(--text);
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-blob-left {
+      position: absolute;
+      left: -40px;
+      bottom: -20px;
+      width: 340px;
+      pointer-events: none;
+    }
+    .hero-blob-right {
+      position: absolute;
+      right: -40px;
+      bottom: -20px;
+      width: 300px;
+      pointer-events: none;
+    }
+    .hero-blob-tr {
+      position: absolute;
+      top: 60px;
+      right: 80px;
+      width: 90px;
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 18px;
+      padding: 40px 24px;
+    }
+    .hero-logo-wrap svg { width: 130px; height: 143px; }
+    .hero-brand {
+      font-family: 'Montserrat', sans-serif;
+      font-size: clamp(36px, 7vw, 72px);
+      font-weight: 900;
+      letter-spacing: 6px;
+      color: var(--brown);
+      line-height: 1;
+      margin-top: -6px;
+    }
+    .hero-tagline {
+      font-size: clamp(15px, 2.2vw, 20px);
+      font-weight: 300;
+      color: var(--muted);
+      letter-spacing: 1.5px;
+    }
+    .hero-rating {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--gold);
+      font-weight: 600;
+    }
+    .hero-rating i { color: var(--gold); }
+    .hero-address {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 400px;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 14px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold);
+      color: white;
+      text-decoration: none;
+      padding: 15px 36px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 15px;
+      letter-spacing: 0.3px;
+      transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
+      box-shadow: 0 6px 24px rgba(201,162,39,0.35);
+    }
+    .btn-primary:hover {
+      background: var(--gold-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 32px rgba(201,162,39,0.45);
+    }
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--text);
+      text-decoration: none;
+      padding: 15px 36px;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 15px;
+      border: 2px solid var(--cream-dark);
+      transition: border-color 0.2s, color 0.2s, transform 0.2s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+      transform: translateY(-2px);
+    }
+
+    /* ── SECTIONS ── */
+    section { padding: 100px 56px; }
+    .inner { max-width: 1100px; margin: 0 auto; }
+    .tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+    .sec-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(30px, 4.5vw, 50px);
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.15;
+      margin-bottom: 22px;
+    }
+    .sec-text {
+      font-size: 16px;
+      line-height: 1.85;
+      color: var(--muted);
+    }
+
+    /* ── SOBRE ── */
+    #sobre { background: var(--white); }
+    .sobre-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .sobre-right {
+      position: relative;
+      height: 460px;
+    }
+    .s-card {
+      position: absolute;
+      border-radius: 22px;
+      padding: 32px;
+    }
+    .s-card-main {
+      background: var(--cream);
+      width: 290px;
+      top: 0; left: 0;
+      box-shadow: 0 8px 36px rgba(0,0,0,0.07);
+      z-index: 2;
+    }
+    .s-card-main .icon {
+      width: 50px; height: 50px;
+      background: var(--gold);
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+      margin-bottom: 16px;
+    }
+    .s-card-main h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 20px;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .s-card-main p { font-size: 14px; line-height: 1.7; color: var(--muted); }
+    .s-card-gold {
+      background: var(--gold);
+      color: white;
+      width: 220px;
+      bottom: 20px; right: 0;
+      text-align: center;
+      box-shadow: 0 8px 36px rgba(201,162,39,0.3);
+    }
+    .s-card-brown {
+      background: var(--brown);
+      color: white;
+      width: 160px;
+      top: 48%;
+      right: 48px;
+      transform: translateY(-50%);
+      text-align: center;
+      z-index: 3;
+      border-radius: 18px;
+      padding: 24px 16px;
+      box-shadow: 0 8px 36px rgba(61,43,31,0.35);
+    }
+    .stat-num {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 40px;
+      font-weight: 900;
+      line-height: 1;
+    }
+    .stat-label { font-size: 12px; font-weight: 600; opacity: 0.9; margin-top: 5px; }
+    .sobre-text-block { display: flex; flex-direction: column; gap: 18px; }
+    .sobre-text-block .sec-text + .sec-text { margin-top: 0; }
+
+    /* ── DIFERENCIAIS ── */
+    #diferenciais { background: var(--cream); position: relative; overflow: hidden; }
+    .obj-header { text-align: center; margin-bottom: 56px; }
+    .obj-header .sec-text { max-width: 600px; margin: 0 auto; }
+    .obj-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+    .obj-card {
+      background: white;
+      border-radius: 22px;
+      padding: 36px 26px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .obj-card:hover { transform: translateY(-7px); box-shadow: 0 14px 44px rgba(0,0,0,0.1); }
+    .obj-icon {
+      width: 64px; height: 64px;
+      border-radius: 18px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 28px;
+      margin: 0 auto 20px;
+    }
+    .obj-card:nth-child(odd) .obj-icon { background: var(--gold-light); color: var(--gold); }
+    .obj-card:nth-child(even) .obj-icon { background: var(--brown-light); color: var(--brown); }
+    .obj-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 17px;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .obj-card p { font-size: 13px; line-height: 1.75; color: var(--muted); }
+
+    /* ── SERVIÇOS ── */
+    #servicos { background: var(--white); }
+    .tab-row {
+      display: flex;
+      gap: 10px;
+      margin: 12px 0 44px;
+      flex-wrap: wrap;
+    }
+    .tab-btn {
+      padding: 12px 28px;
+      border-radius: 50px;
+      border: 2px solid var(--cream-dark);
+      background: transparent;
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab-btn.active { background: var(--gold); border-color: var(--gold); color: white; }
+    .tab-btn:hover:not(.active) { border-color: var(--gold); color: var(--gold); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+    .srv-note {
+      padding: 18px 24px;
+      background: var(--brown-light);
+      border-left: 3px solid var(--brown);
+      border-radius: 0 12px 12px 0;
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+    .srv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .srv-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 22px 20px;
+      background: var(--cream);
+      border-radius: 16px;
+      transition: transform 0.22s, box-shadow 0.22s;
+    }
+    .srv-item:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(0,0,0,0.08); }
+    .srv-dot {
+      width: 38px; height: 38px;
+      min-width: 38px;
+      border-radius: 11px;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      font-size: 14px;
+    }
+    .srv-dot.brown { background: var(--brown); }
+    .srv-item h4 { font-size: 13.5px; font-weight: 600; color: var(--text); line-height: 1.45; }
+
+    /* ── EXPERIÊNCIA ── */
+    #experiencia { background: var(--cream); }
+    .seg-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin: 38px 0;
+    }
+    .seg-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 22px;
+      background: white;
+      border-radius: 50px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    }
+    .seg-badge .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .testimonials-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 28px;
+    }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .testimonial-card {
+      background: white;
+      border-radius: 18px;
+      padding: 28px 24px;
+      box-shadow: 0 2px 14px rgba(0,0,0,0.05);
+      transition: transform 0.22s, box-shadow 0.22s;
+    }
+    .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 10px 28px rgba(0,0,0,0.1); }
+    .testimonial-stars {
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .testimonial-text {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+      font-style: italic;
+      margin-bottom: 16px;
+    }
+    .testimonial-author {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* ── CONTATO ── */
+    #contato {
+      background: var(--dark);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #contato .tag { color: var(--gold); }
+    #contato .sec-title { color: white; }
+    #contato .sec-text { color: rgba(255,255,255,0.6); max-width: 580px; margin: 0 auto 48px; }
+    .contato-bg1 {
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: white;
+      opacity: 0.04;
+    }
+    .contato-bg2 {
+      position: absolute;
+      bottom: -100px; left: -80px;
+      width: 280px; height: 280px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0.08;
+    }
+    .contact-info {
+      margin-bottom: 32px;
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+    }
+    .contact-info i {
+      color: var(--gold);
+      margin-right: 8px;
+    }
+    .contact-btns {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .cbtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 36px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cbtn:hover { transform: translateY(-2px); }
+    .cbtn-wa {
+      background: #25D366;
+      color: white;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+    }
+    .cbtn-wa:hover { box-shadow: 0 8px 32px rgba(37,211,102,0.5); }
+    .cbtn-ig {
+      background: linear-gradient(135deg,#405de6,#833ab4,#e1306c,#f56040,#fcaf45);
+      color: white;
+      box-shadow: 0 4px 20px rgba(225,48,108,0.3);
+    }
+    .cbtn-ig:hover { box-shadow: 0 8px 32px rgba(225,48,108,0.45); }
+    .cbtn-phone {
+      background: rgba(255,255,255,0.08);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+    .cbtn-phone:hover { background: rgba(255,255,255,0.14); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #141414;
+      padding: 44px 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+    .ft-logo { display: flex; align-items: center; gap: 10px; }
+    .ft-logo svg { width: 30px; height: 33px; }
+    .ft-name {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      color: var(--gold);
+    }
+    .ft-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 3px; letter-spacing: 0.5px; }
+    .ft-links { display: flex; gap: 28px; list-style: none; }
+    .ft-links a {
+      text-decoration: none;
+      color: rgba(255,255,255,0.45);
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+    .ft-links a:hover { color: var(--gold); }
+    .ft-copy { font-size: 11px; color: rgba(255,255,255,0.22); }
+
+    /* ── FLOATING BUTTONS ── */
+    .float-wrap {
+      position: fixed;
+      bottom: 30px; right: 26px;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .float-btn {
+      width: 58px; height: 58px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      font-size: 23px;
+      color: white;
+      box-shadow: 0 4px 22px rgba(0,0,0,0.28);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+    }
+    .float-btn:hover { transform: scale(1.13) translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,0.35); }
+    .float-btn-wa { background: #25D366; }
+    .float-btn-ig {
+      background: linear-gradient(135deg,#405de6,#5b51d8,#833ab4,#c13584,#e1306c,#fd1d1d,#f56040,#f77737,#fcaf45,#ffdc80);
+    }
+    .float-tooltip {
+      position: absolute;
+      right: 72px;
+      white-space: nowrap;
+      background: rgba(0,0,0,0.82);
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      padding: 7px 13px;
+      border-radius: 8px;
+      opacity: 0;
+      transform: translateX(8px);
+      transition: all 0.22s;
+      pointer-events: none;
+    }
+    .float-btn:hover .float-tooltip { opacity: 1; transform: translateX(0); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 960px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .nav-hamburger { display: flex; }
+      section { padding: 72px 24px; }
+      .sobre-grid { grid-template-columns: 1fr; gap: 48px; }
+      .sobre-right { display: none; }
+      .obj-grid { grid-template-columns: repeat(2, 1fr); }
+      .srv-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: repeat(2, 1fr); }
+      footer { padding: 36px 24px; flex-direction: column; }
+      .ft-links { flex-direction: column; gap: 14px; }
+    }
+    @media (max-width: 600px) {
+      .obj-grid { grid-template-columns: 1fr; }
+      .srv-grid { grid-template-columns: 1fr; }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .hero-blob-left, .hero-blob-right { width: 160px; }
+      .tab-row { flex-direction: column; }
+      .tab-btn { text-align: center; }
+      .seg-row { gap: 10px; }
+      .contact-btns { flex-direction: column; align-items: center; }
+      .hero-brand { letter-spacing: 4px; }
+      .hero-btns { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <svg viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="30" width="60" height="50" rx="8" fill="#3D2B1F"/>
+      <path d="M35 55 L50 40 L65 55" stroke="#C9A227" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="50" cy="62" r="6" fill="#C9A227"/>
+      <rect x="45" y="20" width="10" height="15" rx="3" fill="#C9A227"/>
+    </svg>
+    <span class="nav-logo-name">DOM FRANÇA</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#diferenciais">Diferenciais</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#experiencia">Avaliações</a></li>
+    <li><a href="#contato" class="nav-cta">Agendar Horário</a></li>
+  </ul>
+  <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobile-nav">
+  <button class="mobile-close" id="mobile-close">✕</button>
+  <a href="#sobre" class="mobile-link">Sobre</a>
+  <a href="#diferenciais" class="mobile-link">Diferenciais</a>
+  <a href="#servicos" class="mobile-link">Serviços</a>
+  <a href="#experiencia" class="mobile-link">Avaliações</a>
+  <a href="#contato" class="mobile-link" style="color:var(--gold)">Agendar Horário</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <!-- Organic blobs -->
+  <svg class="hero-blob-left" viewBox="0 0 340 340" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 0 230 Q 80 160 55 50 Q 40 10 0 0 L 0 0 Z" fill="#3D2B1F" opacity="0.85"/>
+    <path d="M 0 340 Q 130 290 100 180 Q 75 110 0 230 Z" fill="#3D2B1F" opacity="0.6"/>
+  </svg>
+  <svg class="hero-blob-right" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M 300 80 Q 190 120 210 300 L 300 300 Z" fill="#C9A227" opacity="0.85"/>
+    <path d="M 300 0 Q 240 40 270 130 Q 190 120 300 80 Z" fill="#C9A227" opacity="0.5"/>
+  </svg>
+  <svg class="hero-blob-tr" viewBox="0 0 90 90" fill="none">
+    <circle cx="45" cy="45" r="45" fill="#3D2B1F"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="hero-logo-wrap">
+      <svg viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="15" y="25" width="70" height="60" rx="10" fill="#3D2B1F"/>
+        <path d="M30 60 L50 35 L70 60" stroke="#C9A227" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <circle cx="50" cy="72" r="8" fill="#C9A227"/>
+        <rect x="43" y="10" width="14" height="20" rx="4" fill="#C9A227"/>
+      </svg>
+    </div>
+    <div class="hero-brand">DOM FRANÇA</div>
+    <div class="hero-tagline">Barbearia e Visagismo</div>
+    <div class="hero-rating">
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <i class="fas fa-star"></i>
+      <span>5.0 (32 avaliações no Google)</span>
+    </div>
+    <div class="hero-address">
+      <i class="fas fa-map-marker-alt"></i> R. Branco de Morais, 316 - Chácara Santo Antônio, São Paulo - SP
+    </div>
+    <div class="hero-btns">
+      <a href="https://wa.me/5511978267744" class="btn-primary" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i> Agendar Horário
+      </a>
+      <a href="#servicos" class="btn-ghost">
+        <i class="fas fa-cut"></i> Ver Serviços
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre">
+  <div class="inner">
+    <div class="sobre-grid">
+      <div class="sobre-text-block">
+        <div>
+          <span class="tag">Quem Somos</span>
+          <h2 class="sec-title">Tradição e excelência em cada corte</h2>
+        </div>
+        <p class="sec-text">
+          A Dom França Barbearia e Visagismo nasceu da paixão por transformar a autoestima masculina através de cortes precisos e atendimento personalizado. Somos especialistas em criar looks que valorizam a identidade de cada cliente.
+        </p>
+        <p class="sec-text">
+          Nossa equipe é formada por profissionais experientes e constantemente atualizados com as últimas tendências do mercado. Combinamos técnicas clássicas de barbearia com o moderno conceito de visagismo para entregar resultados que superam expectativas.
+        </p>
+        <p class="sec-text">
+          Na Dom França, cada cliente é único. Por isso, oferecemos uma consultoria personalizada para encontrar o corte e estilo ideal que harmoniza com seu rosto, personalidade e estilo de vida.
+        </p>
+      </div>
+      <div class="sobre-right">
+        <div class="s-card s-card-main">
+          <div class="icon">✂️</div>
+          <h3>Nossa Missão</h3>
+          <p>Elevar a autoestima masculina através de cortes impecáveis e atendimento de excelência.</p>
+        </div>
+        <div class="s-card s-card-brown">
+          <div class="stat-num">5.0</div>
+          <div class="stat-label">Estrelas no Google</div>
+        </div>
+        <div class="s-card s-card-gold">
+          <div class="stat-num" style="font-family:'Montserrat',sans-serif;font-weight:900;font-size:38px;">32</div>
+          <div style="font-size:13px;margin-top:8px;opacity:.9;font-weight:600;">Avaliações 5 Estrelas</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais">
+  <div class="inner">
+    <div class="obj-header">
+      <span class="tag">Nossos Diferenciais</span>
+      <h2 class="sec-title">Por que escolher a Dom França?</h2>
+      <p class="sec-text">Oferecemos uma experiência completa que vai além de um simples corte de cabelo. Aqui você encontra qualidade, conforto e estilo.</p>
+    </div>
+    <div class="obj-grid">
+      <div class="obj-card">
+        <div class="obj-icon">👁️</div>
+        <h3>Visagismo Profissional</h3>
+        <p>Análise completa do seu rosto para encontrar o corte que mais valoriza suas características únicas.</p>
+      </div>
+      <div class="obj-card">
+        <div class="obj-icon">✂️</div>
+        <h3>Técnicas Modernas</h3>
+        <p>Profissionais atualizados com as últimas tendências e técnicas do mercado de barbearia.</p>
+      </div>
+      <div class="obj-card">
+        <div class="obj-icon">🛋️</div>
+        <h3>Ambiente Premium</h3>
+        <p>Espaço confortável e acolhedor projetado para você relaxar enquanto cuida do visual.</p>
+      </div>
+      <div class="obj-card">
+        <div class="obj-icon">⭐</div>
+        <h3>Atendimento Exclusivo</h3>
+        <p>Cada cliente recebe atenção personalizada para garantir total satisfação com o resultado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section id="servicos">
+  <div class="inner">
+    <div class="">
+      <span class="tag">Nossos Serviços</span>
+      <h2 class="sec-title">O que oferecemos</h2>
+    </div>
+    <div class="tab-row">
+      <button class="tab-btn active" data-tab="cortes">Cortes & Barba</button>
+      <button class="tab-btn" data-tab="tratamentos">Tratamentos & Extras</button>
+    </div>
+
+    <!-- Cortes -->
+    <div class="tab-panel active" id="tab-cortes">
+      <div class="srv-note">
+        <strong>Cortes & Barba</strong> — Serviços tradicionais de barbearia executados com precisão e qualidade.
+      </div>
+      <div class="srv-grid">
+        <div class="srv-item">
+          <div class="srv-dot"><i class="fas fa-cut"></i></div>
+          <h4>Corte Masculino Tradicional</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot"><i class="fas fa-cut"></i></div>
+          <h4>Corte com Visagismo</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot"><i class="fas fa-cut"></i></div>
+          <h4>Corte Degradê / Fade</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot"><i class="fas fa-razor"></i></div>
+          <h4>Barba Completa</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot"><i class="fas fa-razor"></i></div>
+          <h4>Barba com Navalha</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot"><i class="fas fa-razor"></i></div>
+          <h4>Desenho de Barba</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot"><i class="fas fa-star"></i></div>
+          <h4>Combo Corte + Barba</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot"><i class="fas fa-child"></i></div>
+          <h4>Corte Infantil</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot"><i class="fas fa-user"></i></div>
+          <h4>Pezinho / Acabamento</h4>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tratamentos -->
+    <div class="tab-panel" id="tab-tratamentos">
+      <div class="srv-note" style="border-color:var(--gold);background:var(--gold-light);">
+        <strong>Tratamentos & Extras</strong> — Serviços especiais para cuidar da saúde e aparência dos seus cabelos e barba.
+      </div>
+      <div class="srv-grid">
+        <div class="srv-item">
+          <div class="srv-dot brown"><i class="fas fa-spa"></i></div>
+          <h4>Hidratação Capilar</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot brown"><i class="fas fa-tint"></i></div>
+          <h4>Tratamento para Barba</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot brown"><i class="fas fa-fire"></i></div>
+          <h4>Toalha Quente Relaxante</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot brown"><i class="fas fa-paint-brush"></i></div>
+          <h4>Coloração / Pigmentação</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot brown"><i class="fas fa-magic"></i></div>
+          <h4>Platinado / Luzes</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot brown"><i class="fas fa-broom"></i></div>
+          <h4>Limpeza de Pele</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot brown"><i class="fas fa-eye"></i></div>
+          <h4>Design de Sobrancelha</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot brown"><i class="fas fa-leaf"></i></div>
+          <h4>Relaxamento Capilar</h4>
+        </div>
+        <div class="srv-item">
+          <div class="srv-dot brown"><i class="fas fa-gem"></i></div>
+          <h4>Day Spa Masculino</h4>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVALIAÇÕES -->
+<section id="experiencia">
+  <div class="inner">
+    <div class="">
+      <span class="tag">Avaliações</span>
+      <h2 class="sec-title">O que nossos clientes dizem</h2>
+      <p class="sec-text">Avaliado com 5 estrelas no Google! Confira alguns depoimentos de quem já conhece nosso trabalho.</p>
+    </div>
+    <div class="seg-row">
+      <div class="seg-badge"><span class="dot" style="background:var(--gold)"></span> Cortes Precisos</div>
+      <div class="seg-badge"><span class="dot" style="background:var(--brown)"></span> Atendimento Nota 10</div>
+      <div class="seg-badge"><span class="dot" style="background:var(--gold)"></span> Ambiente Agradável</div>
+      <div class="seg-badge"><span class="dot" style="background:var(--brown)"></span> Profissionais Qualificados</div>
+    </div>
+    <p class="testimonials-title">Depoimentos de clientes:</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">"Melhor barbearia da região! Atendimento impecável e o corte ficou exatamente como eu queria. Recomendo demais!"</p>
+        <div class="testimonial-author">— Ricardo M.</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">"Profissionais muito capacitados. O visagismo fez toda diferença no meu visual. Ambiente super agradável!"</p>
+        <div class="testimonial-author">— Felipe S.</div>
+      </div>
+      <div class="testimonial-card">
+        <div class="testimonial-stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+        </div>
+        <p class="testimonial-text">"Já sou cliente há anos e nunca me decepcionei. Qualidade consistente e ótimo custo-benefício. Top!"</p>
+        <div class="testimonial-author">— Bruno L.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section id="contato">
+  <div class="contato-bg1"></div>
+  <div class="contato-bg2"></div>
+  <div class="inner" style="position:relative;z-index:1;">
+    <span class="tag">Agende seu Horário</span>
+    <h2 class="sec-title">Pronto para renovar o visual?</h2>
+    <p class="sec-text">Entre em contato com a Dom França Barbearia e agende seu horário. Estamos prontos para oferecer a melhor experiência em corte e cuidados masculinos.</p>
+    <div class="contact-info">
+      <p><i class="fas fa-map-marker-alt"></i> R. Branco de Morais, 316 - Chácara Santo Antônio, São Paulo - SP</p>
+    </div>
+    <div class="contact-btns">
+      <a href="https://wa.me/5511978267744" class="cbtn cbtn-wa" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp fa-lg"></i> WhatsApp
+      </a>
+      <a href="#" class="cbtn cbtn-ig">
+        <i class="fab fa-instagram fa-lg"></i> Instagram
+      </a>
+      <a href="tel:+5511978267744" class="cbtn cbtn-phone">
+        <i class="fas fa-phone"></i> (11) 97826-7744
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="ft-logo">
+    <svg viewBox="0 0 100 110" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="20" y="30" width="60" height="50" rx="8" fill="#3D2B1F"/>
+      <path d="M35 55 L50 40 L65 55" stroke="#C9A227" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      <circle cx="50" cy="62" r="6" fill="#C9A227"/>
+      <rect x="45" y="20" width="10" height="15" rx="3" fill="#C9A227"/>
+    </svg>
+    <div>
+      <div class="ft-name">DOM FRANÇA</div>
+      <div class="ft-sub">Barbearia e Visagismo</div>
+    </div>
+  </div>
+  <ul class="ft-links">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#experiencia">Avaliações</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <div>
+    <div class="ft-copy">© 2025 Dom França Barbearia e Visagismo. Todos os direitos reservados.</div>
+    <div style="margin-top:8px;font-size:12px;color:#999">Site criado por <a href="https://wa.me/5511999784524" target="_blank" style="color:inherit">Raul Ramos</a> · <a href="https://wa.me/5511999784524?text=Quero%20um%20site%20para%20meu%20negócio" target="_blank" style="color:inherit">Quero um site assim</a></div>
+  </div>
+</footer>
+
+<!-- FLOATING BUTTONS -->
+<div class="float-wrap">
+  <a href="#" target="_blank" rel="noopener" class="float-btn float-btn-ig" aria-label="Instagram">
+    <i class="fab fa-instagram"></i>
+    <span class="float-tooltip">Instagram</span>
+  </a>
+  <a href="https://wa.me/5511978267744" target="_blank" rel="noopener" class="float-btn float-btn-wa" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+    <span class="float-tooltip">WhatsApp</span>
+  </a>
+</div>
+
+<script>
+  // Nav scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Mobile nav
+  const hamburger = document.getElementById('hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+  const mobileClose = document.getElementById('mobile-close');
+  hamburger.addEventListener('click', () => mobileNav.classList.add('open'));
+  mobileClose.addEventListener('click', () => mobileNav.classList.remove('open'));
+  document.querySelectorAll('.mobile-link').forEach(l => {
+    l.addEventListener('click', () => mobileNav.classList.remove('open'));
+  });
+
+  // Tabs
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
